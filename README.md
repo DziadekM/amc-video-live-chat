@@ -9,3 +9,5 @@ Um das Chat Beispiel zu starten, braucht man folgendes:
 
 1. Im Terminal: node index.js
 2. Im Browser: http://localhost:3000 (oder statt des localhost die IP Adresse des Geräts, auf dem die Anwendung läuft)
+
+Link zum Chat Beispiel Tutorial: https://socket.io/get-started/chat
