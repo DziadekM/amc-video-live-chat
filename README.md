@@ -11,3 +11,8 @@ Um das Chat Beispiel zu starten, braucht man folgendes:
 2. Im Browser: http://localhost:3000 (oder statt des localhost die IP Adresse des Geräts, auf dem die Anwendung läuft)
 
 Link zum Chat Beispiel Tutorial: https://socket.io/get-started/chat
+
+Andere mögliche Tutorials:
+
+1. https://dev.to/asciiden/how-to-use-socket-io-not-the-chat-3l21
+2. 
