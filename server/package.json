@@ -1,0 +1,21 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Melanie Dziadek",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.17.2",
+    "fs": "^0.0.1-security",
+    "https": "^1.0.0",
+    "nodemon": "^2.0.15",
+    "socket.io": "^4.4.0",
+    "twilio": "^3.72.0",
+    "uuid": "^8.3.2"
+  }
+}
