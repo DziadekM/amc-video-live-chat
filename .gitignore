@@ -107,3 +107,4 @@ dist
 .ssl/192.168.2.103-key.pem
 .ssl/cert.pem
 .ssl/key.pem
+.DS_Store
