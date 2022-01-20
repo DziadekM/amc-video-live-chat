@@ -1,0 +1,123 @@
+.introduction_page_container {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+}
+
+.introduction_page_panel {
+    width: 600px;
+    height: 450px;
+    background-color: white;
+    border: 2px solid white;
+    filter: drop-shadow(0 0 0.2rem grey);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.introduction_page_image {
+    width: 250px;
+    position: absolute;
+    top: 3%;
+}
+
+.connecting_buttons_container {
+    display: flex;
+    flex-direction: column;
+    margin-top: 300px;
+}
+
+.join_room_button {
+    background-color: #58cb43;
+    border: 1px solid #e5e5e5;
+    color: white;
+    font-size: 14px;
+    font-weight: 700;
+    width: 180px;
+    height: 30px;
+    border-radius: 8px;
+    transition: 0.3s;
+     font-family:'Roboto Condensed',
+     "sans-serif" !important;
+}
+
+.join_room_button:hover {
+    background-color: #84d36b;
+}
+
+.create_room_button {
+    margin-top: 15px;
+    background-color: white;
+    border: 1px solid #e5e5e5;
+    color: black;
+    font-size: 14px;
+    width: 180px;
+    height: 30px;
+    border-radius: 8px;
+    transition: 0.3s;
+     font-family:'Roboto Condensed',
+     "sans-serif" !important;
+}
+
+.create_room_button:hover {
+    background-color: #e5e5e5;
+}
+
+h6{
+     font-family:'Roboto Condensed',
+     "sans-serif" !important;
+     font-size: 16px;
+     color:white; 
+     margin-bottom: -10px;
+     text-align: center;
+     background-color: #2E3B55;
+     padding: 12px;
+    
+}
+
+h1{
+    color: white;
+    font-family:'Roboto Condensed',
+    "sans-serif" !important;
+     text-align: center;
+     margin-top: 40px;
+     margin-bottom: -120px;
+}
+
+.gather_header {
+    font-family: 'Roboto Condensed',
+        "sans-serif" !important;
+    background-color: #1f0719;
+    color: white;
+    width: 100%;
+    text-align: center;
+    padding: 2px;
+
+}
+
+.introduction_page_picture{
+    width:300px;
+    position: absolute;
+    margin-top: -50px;
+}
+
+
+
+/* added custom style 
+Farbraum: blau=#004a7c
+rot=#b03546#b03546;
+grün=#58cb43
+
+font-family:'Roboto Condensed',
+"sans-serif" !important;
+
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed&display=swap');
+
+*/
+body{
+    background-color: #0A1929;
+}
