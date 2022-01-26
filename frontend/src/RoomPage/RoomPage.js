@@ -1,5 +1,5 @@
-import React, { useEffect } from "react";
-import ChatSection from "./ChatSection/ChatSection";
+import React, { useState, useEffect } from "react";
+import WorldSection from "./WorldSection/WorldSection";
 import ParticipantsSection from "./ParticipantsSection/ParticipantsSection";
 import VideoSection from "./VideoSection/VideoSection";
 import RoomLabel from "./RoomLabel";
@@ -40,7 +40,7 @@ const RoomPage = ({
       <div className="room_container">
         <ParticipantsSection />
 
-        <ChatSection />
+        <WorldSection />
         <VideoSection />
         <RoomLabel roomId={roomId} />
         {showOverlay && <Overlay />}

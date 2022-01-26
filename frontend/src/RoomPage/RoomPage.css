@@ -491,14 +491,19 @@ video {
 }
 
 /*WORLD css*/
-.world_section_container{
+/* .world_section_container{
     background-color:red !important;
     background-image: url('../../public/assets/map.png');
-        width: 100%;
-        height: 76%;
-        margin-top: 54px;
-        border-top-left-radius: 25px;
-        border-top-right-radius: 25px;
-        border-bottom-left-radius: 25px;
-        border-bottom-right-radius: 25px;
-}
+    width: 480px;
+    height: 480px;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size:cover;
+    margin-top: 70px;
+    margin-left: auto;
+    margin-right:auto;
+    border-top-left-radius: 25px;
+    border-top-right-radius: 25px;
+    border-bottom-left-radius: 25px;
+    border-bottom-right-radius: 25px;
+} */
