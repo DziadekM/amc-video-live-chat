@@ -8,21 +8,23 @@
 }
 
 .introduction_page_panel {
-    width: 600px;
-    height: 450px;
-    background-color: white;
-    border: 2px solid white;
-    filter: drop-shadow(0 0 0.2rem grey);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-evenly;
+   width: 600px;
+   height: 450px;
+   background-color: white;
+   border: 10px solid #06d6a0;
+   filter: drop-shadow(0 0 0.2rem grey);
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   border-radius: 10%;
+   justify-content: space-evenly;
 }
 
 .introduction_page_image {
     width: 250px;
     position: absolute;
     top: 3%;
+    margin-top: 5px;
 }
 
 .connecting_buttons_container {
