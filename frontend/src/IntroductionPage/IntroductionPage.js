@@ -28,7 +28,7 @@ const IntroductionPage = ({ setIsRoomHostAction }) => {
           <img
             className="introduction_page_picture"
             alt="Platzhalter-Bild"
-            src="https://www.tv-bopfingen.de/wp-content/uploads/es_web_platzhalter_bild_3x2@800px.png"
+            src="https://cdn.pixabay.com/photo/2016/11/30/02/35/sky-1871753_1280.png"
           ></img>
 
           <ConnectingButtons />

@@ -1,3 +1,4 @@
+import { identity } from "lodash";
 import io from "socket.io-client";
 import { setParticipants, setRoomId } from "../store/actions";
 import store from "../store/store";

@@ -108,7 +108,6 @@ io.on("connection", (socket) => {
 });
 
 // socket.io handlers
-
 const createNewRoomHandler = (data, socket) => {
   console.log("host is creating new room");
   console.log(data);
