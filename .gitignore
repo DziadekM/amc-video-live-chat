@@ -108,3 +108,7 @@ dist
 .ssl/cert.pem
 .ssl/key.pem
 .DS_Store
+default
+.gitignore
+.ssl/192.168.72.159_cert.pem
+.ssl/192.168.72.159-key.pem
