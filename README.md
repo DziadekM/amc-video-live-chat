@@ -1,7 +1,7 @@
 ## amc-video-live-chat
 Implementing Video-Live-Chat via WebRTC. A Project from the University of Applied Science in Fulda.
 
-## Technology Stack
+# Technology Stack
 
 - Webserver: nodeJS
 - Client-Framework: ReactJS
@@ -9,11 +9,11 @@ Implementing Video-Live-Chat via WebRTC. A Project from the University of Applie
 - Used Packages: simple-peer
 
 
-## Starting the Frontend
+# Starting the Frontend
 
 `npm start`
 
-## Starting the Backend
+# Starting the Backend
 
 `node server.js` or `nodemon`
 
