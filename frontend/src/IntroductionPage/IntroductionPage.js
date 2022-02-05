@@ -11,28 +11,26 @@ const IntroductionPage = ({ setIsRoomHostAction }) => {
   });
 
   return (
-    <div>
+    <div className="introduction_page_container">
       <h6>
         Only for Demonstration: A Project from the University of Applied Science
         in Fulda
       </h6>
       <h1>DIY Gather Town</h1>
-      <div className="introduction_page_container">
-        <div className="introduction_page_panel">
-          <img
-            className="introduction_page_image"
-            src={logo}
-            alt="Logo der Hochschule Fulda"
-          ></img>
+      <div className="introduction_page_panel">
+        <img
+          className="introduction_page_image"
+          src={logo}
+          alt="Logo der Hochschule Fulda"
+        ></img>
 
-          <img
-            className="introduction_page_picture"
-            alt="Platzhalter-Bild"
-            src="https://cdn.pixabay.com/photo/2016/11/30/02/35/sky-1871753_1280.png"
-          ></img>
+        <img
+          className="introduction_page_picture"
+          alt="Platzhalter-Bild"
+          src="https://cdn.pixabay.com/photo/2016/11/30/02/35/sky-1871753_1280.png"
+        ></img>
 
-          <ConnectingButtons />
-        </div>
+        <ConnectingButtons />
       </div>
     </div>
   );

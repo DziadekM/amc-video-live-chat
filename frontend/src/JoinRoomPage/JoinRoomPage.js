@@ -18,18 +18,15 @@ const JoinRoomPage = (props) => {
   }, []);
 
   return (
-    <div>
+    <div className="join_room_page_container">
       <h6>
         Only for Demonstration: A Project from the University of Applied Science
         in Fulda
       </h6>
       <h1>DIY Gather Town</h1>
-
-      <div className="join_room_page_container">
-        <div className="join_room_page_panel">
-          <JoinRoomTitle isRoomHost={isRoomHost} />
-          <JoinRoomContent />
-        </div>
+      <div className="join_room_page_panel">
+        <JoinRoomTitle isRoomHost={isRoomHost} />
+        <JoinRoomContent />
       </div>
     </div>
   );
