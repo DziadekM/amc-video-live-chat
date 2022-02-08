@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
-import WorldSection from "../WorldSection/WorldSection";
+//import WorldSection from "../WorldSection/WorldSection";
 import ParticipantsSection from "./ParticipantsSection/ParticipantsSection";
 import VideoSection from "./VideoSection/VideoSection";
+import WorldSection from "./WorldSection/WorldSection";
 
 import RoomLabel from "./RoomLabel";
 import * as webRTCHandler from "../utils/webRTCHandler";

@@ -2,7 +2,7 @@ import { useState } from "react";
 import { mapSpots } from "../data/mapSpots";
 export const useCharacter = (propName) => {
   const [name, setName] = useState(propName);
-  const [posicao, setPosicao] = useState({ x: 17, y: 5 });
+  const [posicao, setPosicao] = useState({ x: 10, y: 5 });
   const [side, setSide] = useState("down");
 
   const moveLeft = () => {
