@@ -16,8 +16,6 @@ export const Map = styled.div`
   background-image: url("/assets/map.png");
   background-position: left top;
   background-size: contain;
-  margin-left: auto;
-  margin-right: auto;
-  margin-top: 80px;
+  position: relative;
   margin-bottom: 130px;
 `;

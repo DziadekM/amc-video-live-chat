@@ -7,8 +7,6 @@ export const Container = styled.div`
   top: ${(props) => props.top}px;
   background-image: url("/assets/char.png");
   background-position: 0px ${(props) => props.sidePosicao}px;
-  margin-left: calc(32%);
-  margin-top: calc(5%);
 `;
 export const NameBox = styled.div`
   background-color: #fff;
