@@ -6,6 +6,7 @@ import * as webRTCHandler from "./webRTCHandler";
 
 //prod
 //const SERVER = "https://amc-gathertown.informatik.hs-fulda.de:5000";
+//const SERVER = "https://192.168.72.159:5000";
 
 //dev
 const SERVER = "https://localhost:5000";

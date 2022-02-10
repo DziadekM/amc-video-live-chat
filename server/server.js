@@ -38,21 +38,15 @@ app.use((req, res, next) => {
 
 const options = {
   //prod
-  //key: fs.readFileSync("../.ssl/192.168.72.59.pem"),
-  //cert: fs.readFileSync("../.ssl/192.168.72.59.crt"),
+  //key: fs.readFileSync("../.ssl/192.168.72.159.pem"),
+  //cert: fs.readFileSync("../.ssl/192.168.72.159.crt"),
 
   //dev
   key: fs.readFileSync("../.ssl/localhost-key.pem"),
   cert: fs.readFileSync("../.ssl/localhost-cert.pem"),
 };
 
-const server = https.createServer(
-  options,
-  function (req, res) {
-    res.writeHead(200);
-  },
-  app
-);
+const server = https.createServer(options, app);
 
 let connectedUsers = [];
 let rooms = [];
@@ -87,6 +81,7 @@ io.on("connection", (socket) => {
   console.log(socket.handshake.headers.referer);
 
   console.log(`user connected ${socket.id}`);
+  console.log(socket.handshake.headers.referer);
 
   socket.on("create-new-room", (data) => {
     createNewRoomHandler(data, socket);
