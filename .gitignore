@@ -102,14 +102,9 @@ dist
 
 # TernJS port file
 .tern-port
-.ssl/192.168.2.103-cert.pem
 .gitignore
-.ssl/192.168.2.103-key.pem
-.ssl/cert.pem
-.ssl/key.pem
+.ssl
 .DS_Store
 default
 .gitignore
-.ssl/192.168.72.159_cert.pem
-.ssl/192.168.72.159-key.pem
 default Kopie
