@@ -4,7 +4,12 @@ import { setParticipants, setRoomId } from "../store/actions";
 import store from "../store/store";
 import * as webRTCHandler from "./webRTCHandler";
 
-const SERVER = "http://localhost:5000";
+//prod
+//const SERVER = "https://amc-gathertown.informatik.hs-fulda.de:5000";
+//const SERVER = "https://192.168.72.159:5000";
+
+//dev
+const SERVER = "https://localhost:5000";
 
 let socket = null;
 

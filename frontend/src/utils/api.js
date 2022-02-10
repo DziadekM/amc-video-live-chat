@@ -1,6 +1,11 @@
 import axios from "axios";
 
-const serverApi = "http://localhost:5000/api";
+//prod
+//const serverApi = "https://amc-gathertown.informatik.hs-fulda.de:5000/api";
+//const serverApi = "https://192.168.72.159:5000/api";
+
+//dev
+const serverApi = "https://localhost:5000/api";
 console.log("Server-API");
 
 export const getRoomExists = async (roomId) => {

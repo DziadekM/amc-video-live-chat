@@ -33,26 +33,17 @@ app.use((req, res, next) => {
   });
 });
 
-const server = http.createServer(
-  // {
-  //   key: fs.readFileSync("../.ssl/192.168.72.159-key.pem"),
-  //   cert: fs.readFileSync("../.ssl/192.168.72.159_cert.pem"),
-  // },
-  app
-);
+const options = {
+  //prod
+  //key: fs.readFileSync("../.ssl/192.168.72.159.pem"),
+  //cert: fs.readFileSync("../.ssl/192.168.72.159.crt"),
 
-//erweitern cors allow
-/* const options = {
-  origin: [
-    "http://localhost:3000/",
-    "192.168.72.159:3000",
-    "192.168.72.159",
-    "http://192.168.72.159:3000",
-    "http://192.168.72.159",
-    "https://localhost:3000/",
-    "https://192.168.72.159:3000",
-  ],
-}; */
+  //dev
+  key: fs.readFileSync("../.ssl/localhost-key.pem"),
+  cert: fs.readFileSync("../.ssl/localhost-cert.pem"),
+};
+
+const server = https.createServer(options, app);
 
 let connectedUsers = [];
 let rooms = [];
@@ -85,6 +76,7 @@ const io = require("socket.io")(server, {
 
 io.on("connection", (socket) => {
   console.log(`user connected ${socket.id}`);
+  console.log(socket.handshake.headers.referer);
 
   socket.on("create-new-room", (data) => {
     createNewRoomHandler(data, socket);
