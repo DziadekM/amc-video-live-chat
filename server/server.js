@@ -13,6 +13,9 @@ const app = express();
 //app.options("*", cors());
 
 app.use((req, res, next) => {
+  res.locals.url = req.originalUrl;
+  res.locals.host = req.get("host");
+  res.locals.protocol = req.protocol;
   res.header("Access-Control-Allow-Origin", "*");
 
   // authorized headers for preflight requests
@@ -33,26 +36,23 @@ app.use((req, res, next) => {
   });
 });
 
-const server = http.createServer(
-  // {
-  //   key: fs.readFileSync("../.ssl/192.168.72.159-key.pem"),
-  //   cert: fs.readFileSync("../.ssl/192.168.72.159_cert.pem"),
-  // },
+const options = {
+  //prod
+  //key: fs.readFileSync("../.ssl/192.168.72.59.pem"),
+  //cert: fs.readFileSync("../.ssl/192.168.72.59.crt"),
+
+  //dev
+  key: fs.readFileSync("../.ssl/localhost-key.pem"),
+  cert: fs.readFileSync("../.ssl/localhost-cert.pem"),
+};
+
+const server = https.createServer(
+  options,
+  function (req, res) {
+    res.writeHead(200);
+  },
   app
 );
-
-//erweitern cors allow
-/* const options = {
-  origin: [
-    "http://localhost:3000/",
-    "192.168.72.159:3000",
-    "192.168.72.159",
-    "http://192.168.72.159:3000",
-    "http://192.168.72.159",
-    "https://localhost:3000/",
-    "https://192.168.72.159:3000",
-  ],
-}; */
 
 let connectedUsers = [];
 let rooms = [];
@@ -84,6 +84,8 @@ const io = require("socket.io")(server, {
 });
 
 io.on("connection", (socket) => {
+  console.log(socket.handshake.headers.referer);
+
   console.log(`user connected ${socket.id}`);
 
   socket.on("create-new-room", (data) => {

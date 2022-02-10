@@ -21,10 +21,11 @@
      "typescript": "^4.1.2"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "HOST=localhost HTTPS=true SSL_CRT_FILE=../.ssl/localhost-cert.pem SSL_KEY_FILE=../.ssl/localhost-key.pem react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "prod": "HTTPS=true SSL_CRT_FILE=../.ssl/192.168.72.159.crt SSL_KEY_FILE=../.ssl/192.168.72.159.pem react-scripts start"
   },
   "eslintConfig": {
     "extends": "react-app"
