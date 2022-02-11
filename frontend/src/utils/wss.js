@@ -1,4 +1,3 @@
-import { identity } from "lodash";
 import io from "socket.io-client";
 import { setParticipants, setRoomId } from "../store/actions";
 import store from "../store/store";
@@ -63,12 +62,13 @@ export const createNewRoom = (identity, onlyAudio) => {
 };
 
 export const joinRoom = (identity, roomId, onlyAudio) => {
-  // emit an event to server that we would to join a room
+  //emit an event to server that we would to join a room
   const data = {
     roomId,
     identity,
     onlyAudio,
   };
+
   socket.emit("join-room", data);
 };
 
