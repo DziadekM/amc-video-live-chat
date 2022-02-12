@@ -17,7 +17,7 @@ code {
   margin-top: 3%;
   width: 60%;
   height: calc(100vh - 10%);
-  left: 60%; /*0*/
+  left: 58%; /*0*/
   top: 0;
   position: absolute;
   /*display: flex;*/

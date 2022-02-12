@@ -2,6 +2,7 @@ import io from "socket.io-client";
 import { setParticipants, setRoomId } from "../store/actions";
 import store from "../store/store";
 import * as webRTCHandler from "./webRTCHandler";
+//import { getMessage } from "../RoomPage/ChatSection/NewMessage";
 
 //prod
 //const SERVER = "https://amc-gathertown.informatik.hs-fulda.de:5000";
@@ -52,6 +53,10 @@ export const connectWithSocketIOServer = () => {
   socket.on("user-disconnected", (data) => {
     webRTCHandler.removePeerConnection(data);
   });
+
+  // socket.on("message", (data) => {
+  //   getMessage(data);
+  // });
 };
 
 export const createNewRoom = (identity, onlyAudio) => {
@@ -75,3 +80,6 @@ export const joinRoom = (identity, roomId, onlyAudio) => {
 export const signalPeerData = (data) => {
   socket.emit("conn-signal", data);
 };
+
+//chat
+export const newMessage = (data) => {};

@@ -97,6 +97,10 @@ io.on("connection", (socket) => {
   socket.on("conn-init", (data) => {
     initializeConnectionHandler(data, socket);
   });
+  // Messenger
+  socket.on("message", ({ name, message }) => {
+    io.emit("message", { name, message });
+  });
 });
 
 // socket.io handlers
