@@ -11,7 +11,7 @@ import WorldAvatars from "./WorldAvatars";
 
 const WorldSection = () => {
   return (
-    <div className="chat_section_container">
+    <div className="world_section_container">
       <WorldMap />
       <WorldAvatars />
     </div>
