@@ -106,6 +106,11 @@ io.on("connection", (socket) => {
   socket.on("message", ({ name, message }) => {
     io.emit("message", { name, message });
   });
+
+  socket.on("keydown", ({playerName, key, index}) => {
+    io.emit("keydown", {playerName, key, index});
+    console.log(playerName, key, index);
+  });
 });
 
 // socket.io handlers
