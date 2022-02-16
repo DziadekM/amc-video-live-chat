@@ -2,6 +2,7 @@ import { setShowOverlay, setMessages } from "../store/actions";
 import store from "../store/store";
 import * as wss from "./wss";
 import Peer from "simple-peer";
+import { fetchTURNCredentials, getTurnIceServers } from "./turn";
 
 const defaultConstraints = {
   audio: true,
@@ -26,6 +27,8 @@ export const getLocalPreviewAndInitRoomConnection = async (
   roomId = null,
   onlyAudio
 ) => {
+  // fetch TURN Credentials (turn.js)
+  await fetchTURNCredentials();
   const constraints = onlyAudio ? onlyAudioConstraints : defaultConstraints;
 
   navigator.mediaDevices
@@ -54,13 +57,30 @@ let peers = {};
 let streams = [];
 
 const getConfiguration = () => {
-  return {
-    iceServers: [
-      {
-        urls: "stun:stun.l.google.com:19302",
-      },
-    ],
-  };
+  const turnIceServers = getTurnIceServers();
+
+  if (turnIceServers) {
+    console.log("TURN-SERVER Credentials fetched");
+    //only for dev
+    //console.log(turnIceServers);
+    return {
+      iceServers: [
+        {
+          urls: "stun:stun.l.google.com:19302",
+        },
+        ...turnIceServers,
+      ],
+    };
+  } else {
+    console.warn("Using only STUN-Server");
+    return {
+      iceServers: [
+        {
+          urls: "stun:stun.l.google.com:19302",
+        },
+      ],
+    };
+  }
 };
 
 export const prepareNewPeerConnection = (connUserSocketId, isInitiator) => {

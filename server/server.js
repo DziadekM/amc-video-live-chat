@@ -1,3 +1,4 @@
+require("dotenv").config({ path: "../.env" });
 const express = require("express");
 const http = require("http");
 const https = require("https");
@@ -69,6 +70,26 @@ app.get("/api/room-exists/:roomId", (req, res) => {
   }
 });
 
+//Turn-Server
+app.get("/api/get-turn-credentials", (req, res) => {
+  //Twilio Credentials
+  const accountSid = process.env.ACCOUNT;
+  const authToken = process.env.TOKEN;
+
+  const client = twilio(accountSid, authToken);
+
+  try {
+    //create a token, receive it & send it back
+    client.tokens.create().then((token) => {
+      res.send({ token });
+    });
+  } catch (err) {
+    console.log("Error occured when fetching TURN-Server credentials");
+    console.log(err);
+    res.send({ token: null });
+  }
+});
+
 const io = require("socket.io")(server, {
   cors: {
     origin: "*",
@@ -88,6 +109,7 @@ io.on("connection", (socket) => {
   });
 
   socket.on("join-room", (data) => {
+    console.log("join Room - server.js");
     joinRoomHandler(data, socket);
   });
 
@@ -107,8 +129,8 @@ io.on("connection", (socket) => {
     io.emit("message", { name, message });
   });
 
-  socket.on("keydown", ({playerName, key, index}) => {
-    io.emit("keydown", {playerName, key, index});
+  socket.on("keydown", ({ playerName, key, index }) => {
+    io.emit("keydown", { playerName, key, index });
     console.log(playerName, key, index);
   });
 });
@@ -162,7 +184,7 @@ const joinRoomHandler = (data, socket) => {
     onlyAudio,
   };
 
-  // join room as user which just is trying to join room passing room id
+  // join room as user which is trying to join room => passing room id
   const room = rooms.find((room) => room.id === roomId);
   room.connectedUsers = [...room.connectedUsers, newUser];
 

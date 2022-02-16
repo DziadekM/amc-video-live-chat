@@ -15,12 +15,11 @@ const SingleParticipant = (props) => {
 
   useEffect(() => {
     if (thisChar === index) {
-      console.log('Test');
+      console.log("Test");
       window.addEventListener("keydown", handleKeyDownChar);
     }
-    socket.on('keydown', (data) => {
-
-      HandleKeyDownCharFromSocket(data)
+    socket.on("keydown", (data) => {
+      HandleKeyDownCharFromSocket(data);
     });
   }, []);
 
@@ -59,8 +58,8 @@ const SingleParticipant = (props) => {
         break;
     }
     console.error(playerName, e.code);
-    let key =  e.code
-    socket.emit("keydown", {playerName, key, index});
+    let key = e.code;
+    socket.emit("keydown", { playerName, key, index });
   };
 
   return (
@@ -85,7 +84,7 @@ const WorldAvatars = ({ participants }) => {
             lastItem={participants.length === index + 1}
             participant={participant}
             thisChar={characterIndex}
-            index ={index}
+            index={index}
             identity={participant.identity}
           />
         );

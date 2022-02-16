@@ -68,6 +68,7 @@ export const createNewRoom = (identity, onlyAudio) => {
 };
 
 export const joinRoom = (identity, roomId, onlyAudio) => {
+  console.log("join Room - wss.js");
   //emit an event to server that we would to join a room
   const data = {
     roomId,
