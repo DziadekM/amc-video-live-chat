@@ -1,19 +1,13 @@
-# amc-video-live-chat
-Implementing Video-Live-Chat via WebRTC
+# DIY GatherTown
 
-Recherche Socket.IO:
+Anwendung starten:
 
-Wir brauchen Socket.IO um mehrere User gleichzeitig handlen zu können. Jeder User soll sich unanbhängig von anderen Usern bewegen können. Dazu habe ich ein kleines Chat Beispiel Tutorial durchgearbeitet. Man kann hier mit verschiedenen Geräten im gleichen Netzwerk oder mit verschiedenen Browsern und Tabs auf eine Chat-Website zugreifen, die die Nachrichten dann anzeigt.
+1. Terminal 1: Frontend --> npm i --> Frontend starten mit npm start
+2. Terminal 2: Server --> npm i --> Server starten mit nodemon
 
-Um das Chat Beispiel zu starten, braucht man folgendes:
+Lokal starten:
+https://localhost:3000/
 
-1. Im Terminal: node index.js
-2. Im Browser: http://localhost:3000 (oder statt des localhost die IP Adresse des Geräts, auf dem die Anwendung läuft)
+Mit OpenStack:
 
-Link zum Chat Beispiel Tutorial: https://socket.io/get-started/chat
-
-Andere mögliche Tutorials:
-
-1. https://dev.to/asciiden/how-to-use-socket-io-not-the-chat-3l21
-2. https://www.youtube.com/watch?v=ppcBIHv_ZPs
-3. 
+https://amc-gathertown.informatik.hs-fulda.de:3000/ --> dafür muss man aber im VPN sein
