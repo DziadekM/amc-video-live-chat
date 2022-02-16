@@ -13,7 +13,7 @@ export const Container = styled.div`
 export const Map = styled.div`
   height: 480px;
   width: 480px;
-  background-image: url("/assets/map.png");
+  background-image: url("/assets/Schlossgarten.png");
   background-position: left top;
   background-size: contain;
   position: relative;
