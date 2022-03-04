@@ -15,6 +15,7 @@ let socket = null;
 
 export const connectWithSocketIOServer = () => {
   socket = io(SERVER);
+  console.log("wss.js - " + SERVER);
 
   socket.on("connect", () => {
     console.log("successfully connected with socket.io Server");
@@ -67,6 +68,7 @@ export const createNewRoom = (identity, onlyAudio) => {
 };
 
 export const joinRoom = (identity, roomId, onlyAudio) => {
+  console.log("join Room - wss.js");
   //emit an event to server that we would to join a room
   const data = {
     roomId,

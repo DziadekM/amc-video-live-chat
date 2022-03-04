@@ -1,18 +1,20 @@
-const express = require("express");
-const http = require("http");
+require("dotenv").config({ path: "../.env" });
 const https = require("https");
 const { v4: uuidv4 } = require("uuid");
 const cors = require("cors");
 const twilio = require("twilio");
 const { disconnect } = require("process");
 const fs = require("fs");
+const express = require("express");
 
 const PORT = process.env.PORT || 5000;
 const app = express();
 
-//app.options("*", cors());
-
+//cors
 app.use((req, res, next) => {
+  res.locals.url = req.originalUrl;
+  res.locals.host = req.get("host");
+  res.locals.protocol = req.protocol;
   res.header("Access-Control-Allow-Origin", "*");
 
   // authorized headers for preflight requests
@@ -66,6 +68,26 @@ app.get("/api/room-exists/:roomId", (req, res) => {
   }
 });
 
+//Turn-Server
+app.get("/api/get-turn-credentials", (req, res) => {
+  //Twilio Credentials
+  const accountSid = process.env.ACCOUNT;
+  const authToken = process.env.TOKEN;
+
+  const client = twilio(accountSid, authToken);
+
+  try {
+    //create a token, receive it & send it back
+    client.tokens.create().then((token) => {
+      res.send({ token });
+    });
+  } catch (err) {
+    console.log("Error occured when fetching TURN-Server credentials");
+    console.log(err);
+    res.send({ token: null });
+  }
+});
+
 const io = require("socket.io")(server, {
   cors: {
     origin: "*",
@@ -75,6 +97,8 @@ const io = require("socket.io")(server, {
 });
 
 io.on("connection", (socket) => {
+  console.log(socket.handshake.headers.referer);
+
   console.log(`user connected ${socket.id}`);
   console.log(socket.handshake.headers.referer);
 
@@ -83,6 +107,7 @@ io.on("connection", (socket) => {
   });
 
   socket.on("join-room", (data) => {
+    console.log("join Room - server.js");
     joinRoomHandler(data, socket);
   });
 
@@ -97,9 +122,15 @@ io.on("connection", (socket) => {
   socket.on("conn-init", (data) => {
     initializeConnectionHandler(data, socket);
   });
+  
   // Messenger
   socket.on("message", ({ name, message }) => {
     io.emit("message", { name, message });
+  });
+
+  socket.on("keydown", ({ playerName, key, index }) => {
+    io.emit("keydown", { playerName, key, index });
+    //console.log(playerName, key, index);
   });
 });
 
@@ -152,7 +183,7 @@ const joinRoomHandler = (data, socket) => {
     onlyAudio,
   };
 
-  // join room as user which just is trying to join room passing room id
+  // join room as user which is trying to join room => passing room id
   const room = rooms.find((room) => room.id === roomId);
   room.connectedUsers = [...room.connectedUsers, newUser];
 
@@ -169,6 +200,7 @@ const joinRoomHandler = (data, socket) => {
         connUserSocketId: socket.id,
       };
 
+      //emit Event to all users in this specific room (prepare incomming connection)
       io.to(user.socketId).emit("conn-prepare", data);
     }
   });

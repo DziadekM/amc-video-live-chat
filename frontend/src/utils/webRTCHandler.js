@@ -2,6 +2,7 @@ import { setShowOverlay, setMessages } from "../store/actions";
 import store from "../store/store";
 import * as wss from "./wss";
 import Peer from "simple-peer";
+import { fetchTURNCredentials, getTurnIceServers } from "./turn";
 
 const defaultConstraints = {
   audio: true,
@@ -26,6 +27,8 @@ export const getLocalPreviewAndInitRoomConnection = async (
   roomId = null,
   onlyAudio
 ) => {
+  // fetch TURN Credentials (turn.js)
+  await fetchTURNCredentials();
   const constraints = onlyAudio ? onlyAudioConstraints : defaultConstraints;
 
   navigator.mediaDevices
@@ -54,13 +57,29 @@ let peers = {};
 let streams = [];
 
 const getConfiguration = () => {
-  return {
-    iceServers: [
-      {
-        urls: "stun:stun.l.google.com:19302",
-      },
-    ],
-  };
+  const turnIceServers = getTurnIceServers();
+
+  if (turnIceServers) {
+    //only for dev
+    console.log(turnIceServers);
+    return {
+      iceServers: [
+        {
+          urls: "stun:global.stun.twilio.com:3478?transport=udp",
+        },
+        ...turnIceServers,
+      ],
+    };
+  } else {
+    console.warn("Using only STUN-Server");
+    return {
+      iceServers: [
+        {
+          urls: "stun:global.stun.twilio.com:3478?transport=udp",
+        },
+      ],
+    };
+  }
 };
 
 export const prepareNewPeerConnection = (connUserSocketId, isInitiator) => {
@@ -74,7 +93,6 @@ export const prepareNewPeerConnection = (connUserSocketId, isInitiator) => {
 
   peers[connUserSocketId].on("signal", (data) => {
     // webRTC offer, webRTC Answer (SDP informations), ice candidates
-
     const signalData = {
       signal: data,
       connUserSocketId: connUserSocketId,
