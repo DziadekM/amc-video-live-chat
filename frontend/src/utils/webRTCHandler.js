@@ -60,13 +60,12 @@ const getConfiguration = () => {
   const turnIceServers = getTurnIceServers();
 
   if (turnIceServers) {
-    console.log("TURN-SERVER Credentials fetched");
     //only for dev
-    //console.log(turnIceServers);
+    console.log(turnIceServers);
     return {
       iceServers: [
         {
-          urls: "stun:stun.l.google.com:19302",
+          urls: "stun:global.stun.twilio.com:3478?transport=udp",
         },
         ...turnIceServers,
       ],
@@ -76,7 +75,7 @@ const getConfiguration = () => {
     return {
       iceServers: [
         {
-          urls: "stun:stun.l.google.com:19302",
+          urls: "stun:global.stun.twilio.com:3478?transport=udp",
         },
       ],
     };
@@ -94,7 +93,6 @@ export const prepareNewPeerConnection = (connUserSocketId, isInitiator) => {
 
   peers[connUserSocketId].on("signal", (data) => {
     // webRTC offer, webRTC Answer (SDP informations), ice candidates
-
     const signalData = {
       signal: data,
       connUserSocketId: connUserSocketId,

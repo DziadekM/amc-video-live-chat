@@ -6,16 +6,18 @@ import { useState, useEffect } from "react";
 import store from "../../store/store";
 import io from "socket.io-client";
 
+const socket = io.connect("https://localhost:5000");
+
 const SingleParticipant = (props) => {
   const { identity, lastItem, participant, thisChar, index } = props;
   const playerName = props.identity;
   const char = useCharacter(playerName);
-  const socket = io.connect("https://localhost:5000");
+
   const [state, setState] = useState({ index: thisChar, name: playerName });
 
   useEffect(() => {
     if (thisChar === index) {
-      console.log("Test");
+      //console.log("Test");
       window.addEventListener("keydown", handleKeyDownChar);
     }
     socket.on("keydown", (data) => {
@@ -57,7 +59,7 @@ const SingleParticipant = (props) => {
         char.moveDown();
         break;
     }
-    console.error(playerName, e.code);
+    //console.error(playerName, e.code);
     let key = e.code;
     socket.emit("keydown", { playerName, key, index });
   };
@@ -70,13 +72,13 @@ const SingleParticipant = (props) => {
 };
 let characterIndex = -1;
 const WorldAvatars = ({ participants }) => {
-  console.log(participants);
+  //console.log(participants);
   return (
     <div>
       {participants.map((participant, index) => {
         if (participants.length === index + 1 && characterIndex === -1) {
           characterIndex = index;
-          console.log(characterIndex);
+          //console.log(characterIndex);
         }
         return (
           <SingleParticipant

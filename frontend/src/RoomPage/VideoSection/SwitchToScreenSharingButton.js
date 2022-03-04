@@ -24,17 +24,15 @@ const SwitchToScreenSharingButton = () => {
       }
       if (stream) {
         setScreenSharingStream(stream);
+        //function to switch the video track
         webRTCHandler.toggleScreenShare(isScreenSharingActive, stream);
         setIsScreenSharingActive(true);
-
-        //function to switch the video track
       }
     } else {
       webRTCHandler.toggleScreenShare(isScreenSharingActive);
-      //switch
+      //switch for video track from camera
       setIsScreenSharingActive(false);
-
-      //stop sharing
+      //stop screen sharing stream
       screenSharingStream.getTracks().forEach((t) => t.stop());
       setScreenSharingStream(null);
     }

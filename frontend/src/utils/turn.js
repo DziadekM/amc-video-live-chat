@@ -8,6 +8,7 @@ export const fetchTURNCredentials = async () => {
   => iceServers in token*/
   if (responseData.token?.iceServers) {
     TURNIceServers = responseData.token.iceServers;
+    console.log("Type " + TURNIceServers.type);
   }
   return TURNIceServers;
 };

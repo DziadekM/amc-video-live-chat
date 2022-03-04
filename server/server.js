@@ -1,18 +1,16 @@
 require("dotenv").config({ path: "../.env" });
-const express = require("express");
-const http = require("http");
 const https = require("https");
 const { v4: uuidv4 } = require("uuid");
 const cors = require("cors");
 const twilio = require("twilio");
 const { disconnect } = require("process");
 const fs = require("fs");
+const express = require("express");
 
 const PORT = process.env.PORT || 5000;
 const app = express();
 
-//app.options("*", cors());
-
+//cors
 app.use((req, res, next) => {
   res.locals.url = req.originalUrl;
   res.locals.host = req.get("host");
@@ -124,6 +122,7 @@ io.on("connection", (socket) => {
   socket.on("conn-init", (data) => {
     initializeConnectionHandler(data, socket);
   });
+  
   // Messenger
   socket.on("message", ({ name, message }) => {
     io.emit("message", { name, message });
@@ -131,7 +130,7 @@ io.on("connection", (socket) => {
 
   socket.on("keydown", ({ playerName, key, index }) => {
     io.emit("keydown", { playerName, key, index });
-    console.log(playerName, key, index);
+    //console.log(playerName, key, index);
   });
 });
 
@@ -201,6 +200,7 @@ const joinRoomHandler = (data, socket) => {
         connUserSocketId: socket.id,
       };
 
+      //emit Event to all users in this specific room (prepare incomming connection)
       io.to(user.socketId).emit("conn-prepare", data);
     }
   });
