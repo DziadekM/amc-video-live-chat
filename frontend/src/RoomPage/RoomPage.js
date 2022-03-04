@@ -1,7 +1,9 @@
-import React, { useEffect } from "react";
-import ChatSection from "./ChatSection/ChatSection";
+import React, { useState, useEffect } from "react";
+//import WorldSection from "../WorldSection/WorldSection";
 import ParticipantsSection from "./ParticipantsSection/ParticipantsSection";
 import VideoSection from "./VideoSection/VideoSection";
+import WorldSection from "./WorldSection/WorldSection";
+
 import RoomLabel from "./RoomLabel";
 import * as webRTCHandler from "../utils/webRTCHandler";
 import { connect } from "react-redux";
@@ -31,20 +33,13 @@ const RoomPage = ({
   }, []);
 
   return (
-    <div>
-      <h6>
-        Only for Demonstration: A Project from the University of Applied Science
-        in Fulda
-      </h6>
-      <h1>DIY Gather Town</h1>
-      <div className="room_container">
-        <ParticipantsSection />
+    <div className="room_container">
+      <ParticipantsSection />
 
-        <ChatSection />
-        <VideoSection />
-        <RoomLabel roomId={roomId} />
-        {showOverlay && <Overlay />}
-      </div>
+      <WorldSection />
+      <VideoSection />
+      <RoomLabel roomId={roomId} />
+      {showOverlay && <Overlay />}
     </div>
   );
 };

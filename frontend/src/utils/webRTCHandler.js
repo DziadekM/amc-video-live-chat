@@ -1,4 +1,4 @@
-import { setShowOverlay } from "../store/actions";
+import { setShowOverlay, setMessages } from "../store/actions";
 import store from "../store/store";
 import * as wss from "./wss";
 import Peer from "simple-peer";
@@ -96,7 +96,6 @@ export const handleSignalingData = (data) => {
   peers[data.connUserSocketId].signal(data.signal);
 };
 
-//if user leaves the room, remove the peer Connection, because its not necessary
 export const removePeerConnection = (data) => {
   const { socketId } = data;
   const videoContainer = document.getElementById(socketId);
@@ -112,7 +111,6 @@ export const removePeerConnection = (data) => {
 
     videoContainer.parentNode.removeChild(videoContainer);
 
-    //close the peer-connection for the socketId, if user is disconnected
     if (peers[socketId]) {
       peers[socketId].destroy();
     }
@@ -204,4 +202,35 @@ export const toggleMic = (isMuted) => {
 
 export const toggleCamera = (isDisabled) => {
   localStream.getVideoTracks()[0].enabled = isDisabled ? true : false;
+};
+
+export const toggleScreenShare = (
+  isScreenSharingActive,
+  screenSharingStream = null
+) => {
+  if (isScreenSharingActive) {
+    switchVideoTracks(localStream);
+  } else {
+    switchVideoTracks(screenSharingStream);
+  }
+};
+
+const switchVideoTracks = (stream) => {
+  for (let socket_id in peers) {
+    for (let index in peers[socket_id].streams[0].getTracks()) {
+      for (let index2 in stream.getTracks()) {
+        if (
+          peers[socket_id].streams[0].getTracks()[index].kind ===
+          stream.getTracks()[index2].kind
+        ) {
+          peers[socket_id].replaceTrack(
+            peers[socket_id].streams[0].getTracks()[index],
+            stream.getTracks()[index2],
+            peers[socket_id].streams[0]
+          );
+          break;
+        }
+      }
+    }
+  }
 };

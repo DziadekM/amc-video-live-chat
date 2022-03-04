@@ -7,17 +7,43 @@ const twilio = require("twilio");
 const { disconnect } = require("process");
 const fs = require("fs");
 
-const PORT = process.env.PORT || 5002;
+const PORT = process.env.PORT || 5000;
 const app = express();
-const server = https.createServer(
-  {
-    key: fs.readFileSync("../.ssl/192.168.2.103-key.pem"),
-    cert: fs.readFileSync("../.ssl/192.168.2.103-cert.pem"),
-  },
-  app
-);
 
-app.use(cors());
+//app.options("*", cors());
+
+app.use((req, res, next) => {
+  res.header("Access-Control-Allow-Origin", "*");
+
+  // authorized headers for preflight requests
+  // https://developer.mozilla.org/en-US/docs/Glossary/preflight_request
+  res.header(
+    "Access-Control-Allow-Headers",
+    "Origin, X-Requested-With, Content-Type, Accept"
+  );
+  next();
+
+  app.options("*", (req, res) => {
+    // allowed XHR methods
+    res.header(
+      "Access-Control-Allow-Methods",
+      "GET, PATCH, PUT, POST, DELETE, OPTIONS"
+    );
+    res.send();
+  });
+});
+
+const options = {
+  //prod
+  //key: fs.readFileSync("../.ssl/192.168.72.159.pem"),
+  //cert: fs.readFileSync("../.ssl/192.168.72.159.crt"),
+
+  //dev
+  key: fs.readFileSync("../.ssl/localhost-key.pem"),
+  cert: fs.readFileSync("../.ssl/localhost-cert.pem"),
+};
+
+const server = https.createServer(options, app);
 
 let connectedUsers = [];
 let rooms = [];
@@ -50,6 +76,7 @@ const io = require("socket.io")(server, {
 
 io.on("connection", (socket) => {
   console.log(`user connected ${socket.id}`);
+  console.log(socket.handshake.headers.referer);
 
   socket.on("create-new-room", (data) => {
     createNewRoomHandler(data, socket);
@@ -70,10 +97,13 @@ io.on("connection", (socket) => {
   socket.on("conn-init", (data) => {
     initializeConnectionHandler(data, socket);
   });
+  // Messenger
+  socket.on("message", ({ name, message }) => {
+    io.emit("message", { name, message });
+  });
 });
 
 // socket.io handlers
-
 const createNewRoomHandler = (data, socket) => {
   console.log("host is creating new room");
   console.log(data);
